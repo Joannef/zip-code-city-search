@@ -1,6 +1,6 @@
 {
   "name": "zip-code-city-search",
-  "homepage": "https://joannef.github.io/zip-code-city-search.io/zip-code-city-search",
+  "homepage": "https://joannef.github.io/zip-code-city-search.io",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
