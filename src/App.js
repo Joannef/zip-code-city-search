@@ -16,7 +16,7 @@ function City({data}) {
   );
 }
 
-function ZipSearchField({zipCode, onChange}) {
+function ZipSearchField({item, onChange}) {
   return (
     <div>
       <form className="form-inline my-4">
@@ -24,7 +24,7 @@ function ZipSearchField({zipCode, onChange}) {
         <input
           type="text"
           className="form-control ml-2"
-          value={zipCode}
+          value={item}
           onChange={onChange}
         />
       </form>
@@ -36,14 +36,15 @@ class App extends Component {
     super(props);
     this.state = {
       cities: [],
-      zipCode: '',
+      item: '',
     }
   }
-  zipChanged(event) {
-    let zip = event.target.value;
+  itemChanged(event) {
+    let item = event.target.value;
 
-    if(zip.length === 5){
-    fetch(`http://ctp-zip-api.herokuapp.com/zip/${zip}`)
+    //if the item is a zip code
+    if(item.length == 5 && isNaN() == true){
+    fetch(`http://ctp-zip-api.herokuapp.com/zip/${item}`)
       .then((res) => res.json())
       .then((body) => {
         console.log(body);
@@ -63,9 +64,24 @@ class App extends Component {
           cities: []
         })
     }
+    
+    fetch(`http://ctp-zip-api.herokuapp.com/city/${item}`)
+      .then((res) => res.json())
+      .then((body) => {
+        console.log(body);
+        this.setState({
+          cities: body
+        })
+      })
+      .catch((err) => {
+        console.log("err")
+        this.setState({ //if there is errors make cities null
+          cities: []
+        })
+      })
 
     this.setState({
-      zipCode: event.target.value
+      item: event.target.value
     })
   }
 
@@ -79,8 +95,8 @@ class App extends Component {
           <div className="row">
             <div className="col">
               <ZipSearchField
-                zipCode={this.state.zipCode}
-                onChange={(e) => this.zipChanged(e)}
+                item={this.state.item}
+                onChange={(e) => this.itemChanged(e)}
               />
             </div>
           </div>
