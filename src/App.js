@@ -16,7 +16,7 @@ function City({data}) {
   );
 }
 
-function ZipSearchField({item, onChange}) {
+function ZipSearchField({userIn, onChange}) {
   return (
     <div>
       <form className="form-inline my-4">
@@ -24,7 +24,7 @@ function ZipSearchField({item, onChange}) {
         <input
           type="text"
           className="form-control ml-2"
-          value={item}
+          value={userIn}
           onChange={onChange}
         />
       </form>
@@ -36,15 +36,15 @@ class App extends Component {
     super(props);
     this.state = {
       cities: [],
-      item: '',
+      userIn: '',
     }
   }
-  itemChanged(event) {
-    let item = event.target.value;
+  userInChanged(event) {
+    let userIn = event.target.value;
 
-    //if the item is a zip code
-    if(item.length == 5 && isNaN() == true){
-    fetch(`http://ctp-zip-api.herokuapp.com/zip/${item}`)
+    //if the userIn is a zip code
+    if(userIn.length == 5 && isNaN() == true){
+    fetch(`http://ctp-zip-api.herokuapp.com/zip/${userIn}`)
       .then((res) => res.json())
       .then((body) => {
         console.log(body);
@@ -59,29 +59,30 @@ class App extends Component {
         })
       })
     } else {
-      console.log("err")
-        this.setState({ //if there is errors make cities null
-          cities: []
+        fetch(`http://ctp-zip-api.herokuapp.com/city/${userIn}`)
+        .then((res) => res.json())
+        .then((body) => {
+          console.log(body);
+          this.setState({
+            cities: body
+          })
+        })
+        .catch((err) => {
+          console.log("err")
+          this.setState({ //if there is errors make cities null
+            cities: []
+          })
         })
     }
     
-    fetch(`http://ctp-zip-api.herokuapp.com/city/${item}`)
-      .then((res) => res.json())
-      .then((body) => {
-        console.log(body);
-        this.setState({
-          cities: body
-        })
-      })
-      .catch((err) => {
-        console.log("err")
-        this.setState({ //if there is errors make cities null
-          cities: []
-        })
-      })
+    
 
+    console.log("err")
+    this.setState({ //if there is errors make cities null
+      cities: []
+    })
     this.setState({
-      item: event.target.value
+      userIn: event.target.value
     })
   }
 
@@ -95,8 +96,8 @@ class App extends Component {
           <div className="row">
             <div className="col">
               <ZipSearchField
-                item={this.state.item}
-                onChange={(e) => this.itemChanged(e)}
+                userIn={this.state.userIn}
+                onChange={(e) => this.userInChanged(e)}
               />
             </div>
           </div>
