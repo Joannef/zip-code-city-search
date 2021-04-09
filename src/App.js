@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
 import './App.css';
-function City({data}) {
-  return (
-    <div className="card mb-4">
-      <div className="card-header">
-        { data.City}
+
+
+function City({data}) { 
+    //do some data stuff
+    return (
+      <div className="card mb-4">
+        <div className="card-header">
+          { data.City}
+        </div>
+        <div className="card-body">
+          <ul>
+            <li>State: {data.State}</li>
+            <li>Location: ({data.Lat}, {data.Long})</li>
+          </ul>
+        </div>
       </div>
-      <div className="card-body">
-        <ul>
-          <li>State: {data.State}</li>
-          <li>Location: ({data.Lat}, {data.Long})</li>
-        </ul>
-      </div>
-    </div>
-  );
+    );
+  
+
 }
 
 function ZipSearchField({userIn, onChange}) {
   return (
     <div>
       <form className="form-inline my-4">
-        <label>Zip Code:</label>
+        <label>Enter Zip-Code or City Name:</label>
         <input
           type="text"
           className="form-control ml-2"
@@ -58,10 +63,8 @@ class App extends Component {
           cities: []
         })
       })
-    } else {
-       
-       
-        fetch(`http://ctp-zip-api.herokuapp.com/city/${ userIn.toUpperCase()}`)
+    } else {       
+        fetch(`http://ctp-zip-api.herokuapp.com/city/${userIn.toUpperCase()}`)
         .then((res) => res.json())
         .then((body) => {
           console.log(body);
@@ -107,16 +110,38 @@ class App extends Component {
             this.state.cities.length === 0 
               ? <p>No Results</p>
               : this.state.cities.map((c, index) => {
-              return (
-                <div className="row" key ={index}>
-                  <div className="col">
-                    <City 
-                      data={c}
-                      
-                    />
+
+                let isCity = false;
+                try{
+                  JSON.parse(c);
+                } catch (e){
+                  isCity = true;
+                }
+
+                console.log(c);
+              if(isCity){
+                return (
+                  <div className="row" key ={index}>
+                    <div className="col">
+                      <City 
+                        data={c}
+                        
+                      />
+                    </div>
                   </div>
-                </div>
-              )
+                )
+              }
+              else{
+                return(
+                  <div className="row" key ={index}>
+                    <div className="col">
+                      <p>{c}</p>
+
+                    </div>
+                  </div>
+
+                )
+              }
             })
           }
         </div>
