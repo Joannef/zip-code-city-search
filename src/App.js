@@ -111,15 +111,16 @@ class App extends Component {
               ? <p>No Results</p>
               : this.state.cities.map((c, index) => {
 
-                let isCity = false;
+                let isCity = false; //this checks if cities is a json object or not
                 try{
-                  JSON.parse(c);
+                  isCity = c.City;
                 } catch (e){
                   isCity = true;
                 }
 
-                console.log(c);
-              if(isCity){
+              
+              if(isCity){ //this runs if cities is a json (it is cities)
+               
                 return (
                   <div className="row" key ={index}>
                     <div className="col">
@@ -131,14 +132,12 @@ class App extends Component {
                   </div>
                 )
               }
-              else{
+              else{ //this means that a zip was entered isntead
+                //maybe add styling here?????
                 return(
-                  <div className="row" key ={index}>
-                    <div className="col">
-                      <p>{c}</p>
-
-                    </div>
-                  </div>
+                  <ul>
+                    <li>{c}</li>
+                  </ul>
 
                 )
               }
