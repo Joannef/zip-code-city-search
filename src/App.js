@@ -59,7 +59,9 @@ class App extends Component {
         })
       })
     } else {
-        fetch(`http://ctp-zip-api.herokuapp.com/city/${userIn}`)
+       
+       
+        fetch(`http://ctp-zip-api.herokuapp.com/city/${ userIn.toUpperCase()}`)
         .then((res) => res.json())
         .then((body) => {
           console.log(body);
