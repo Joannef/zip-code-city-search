@@ -13,6 +13,8 @@ function City({data}) {
           <ul>
             <li>State: {data.State}</li>
             <li>Location: ({data.Lat}, {data.Long})</li>
+            <li>Population (Estimate): {data.EstimatedPopulation} </li>
+            <li>Total Wages: ${data.TotalWages} </li>
           </ul>
         </div>
       </div>
@@ -25,7 +27,7 @@ function ZipSearchField({userIn, onChange}) {
   return (
     <div>
       <form className="form-inline my-4">
-        <label>Enter Zip-Code or City Name:</label>
+        <label>Enter Zip Code:</label>
         <input
           type="text"
           className="form-control ml-2"
@@ -48,7 +50,7 @@ class App extends Component {
     let userIn = event.target.value;
 
     //if the userIn is a zip code
-    if(userIn.length == 5 && isNaN() == true){
+    if(userIn.length === 5){
     fetch(`http://ctp-zip-api.herokuapp.com/zip/${userIn}`)
       .then((res) => res.json())
       .then((body) => {
@@ -63,21 +65,6 @@ class App extends Component {
           cities: []
         })
       })
-    } else {       
-        fetch(`http://ctp-zip-api.herokuapp.com/city/${userIn.toUpperCase()}`)
-        .then((res) => res.json())
-        .then((body) => {
-          console.log(body);
-          this.setState({
-            cities: body
-          })
-        })
-        .catch((err) => {
-          console.log("err")
-          this.setState({ //if there is errors make cities null
-            cities: []
-          })
-        })
     }
     
     
@@ -149,11 +136,3 @@ class App extends Component {
   }
 }
 export default App;
-/*
-npm install -g npm@latest
-TODO:
-- Display more data about each city  -DONE
-- remove results when extra characters are typed -DONE
-- display "no results" if the zip is incorrect instead of empty -DONE
-- add checks to prevent multiple requests if we know zip is invalid format -DONE
-*/
