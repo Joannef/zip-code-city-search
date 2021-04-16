@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/zip-code-city-search.io/static/css/main.445830c2.chunk.css",
+    "main.js": "/zip-code-city-search.io/static/js/main.ae5a8897.chunk.js",
+    "main.js.map": "/zip-code-city-search.io/static/js/main.ae5a8897.chunk.js.map",
+    "runtime-main.js": "/zip-code-city-search.io/static/js/runtime-main.88560169.js",
+    "runtime-main.js.map": "/zip-code-city-search.io/static/js/runtime-main.88560169.js.map",
+    "static/js/2.cbbb000c.chunk.js": "/zip-code-city-search.io/static/js/2.cbbb000c.chunk.js",
+    "static/js/2.cbbb000c.chunk.js.map": "/zip-code-city-search.io/static/js/2.cbbb000c.chunk.js.map",
+    "static/js/3.ccad76f0.chunk.js": "/zip-code-city-search.io/static/js/3.ccad76f0.chunk.js",
+    "static/js/3.ccad76f0.chunk.js.map": "/zip-code-city-search.io/static/js/3.ccad76f0.chunk.js.map",
+    "index.html": "/zip-code-city-search.io/index.html",
+    "static/css/main.445830c2.chunk.css.map": "/zip-code-city-search.io/static/css/main.445830c2.chunk.css.map",
+    "static/js/2.cbbb000c.chunk.js.LICENSE.txt": "/zip-code-city-search.io/static/js/2.cbbb000c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.88560169.js",
+    "static/js/2.cbbb000c.chunk.js",
+    "static/css/main.445830c2.chunk.css",
+    "static/js/main.ae5a8897.chunk.js"
+  ]
+}
