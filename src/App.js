@@ -51,7 +51,7 @@ class App extends Component {
 
     //if the userIn is a zip code
     if(userIn.length === 5){
-    fetch(`http://ctp-zip-api.herokuapp.com/zip/${userIn}`)
+    fetch(`https://ctp-zip-api.herokuapp.com/zip/${userIn}`)
       .then((res) => res.json())
       .then((body) => {
         console.log(body);
@@ -66,7 +66,7 @@ class App extends Component {
         })
       })
     } else {       
-        fetch(`http://ctp-zip-api.herokuapp.com/city/${userIn.toUpperCase()}`)
+        fetch(`https://ctp-zip-api.herokuapp.com/city/${userIn.toUpperCase()}`)
         .then((res) => res.json())
         .then((body) => {
           console.log(body);
